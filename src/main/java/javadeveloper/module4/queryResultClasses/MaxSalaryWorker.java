@@ -1,4 +1,4 @@
-package javadeveloper.module4;
+package javadeveloper.module4.queryResultClasses;
 
 public class MaxSalaryWorker {
     private String name;

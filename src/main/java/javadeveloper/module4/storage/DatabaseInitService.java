@@ -1,12 +1,12 @@
-package javadeveloper.module4;
+package javadeveloper.module4.storage;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class DatabasePopulateService {
+public class DatabaseInitService {
     public static void main(String[] args) {
-        String initDbFileName = "sql/populate_db.sql";
+        String initDbFileName = "sql/init_db.sql.sql";
         String sqlExpression;
 
         try {

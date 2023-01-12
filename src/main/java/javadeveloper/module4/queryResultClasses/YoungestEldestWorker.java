@@ -1,11 +1,11 @@
-package javadeveloper.module4;
+package javadeveloper.module4.queryResultClasses;
 
-public class YoungestEldestWorkers {
+public class YoungestEldestWorker {
     private String type;
     private String name;
     private String birthday;
 
-    public YoungestEldestWorkers(String type, String name, String birthday) {
+    public YoungestEldestWorker(String type, String name, String birthday) {
         this.type = type;
         this.name = name;
         this.birthday = birthday;
@@ -13,7 +13,7 @@ public class YoungestEldestWorkers {
 
     @Override
     public String toString() {
-        return "YoungestEldestWorkers{" +
+        return "YoungestEldestWorker{" +
                 "type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", birthday='" + birthday + '\'' +

@@ -1,4 +1,4 @@
-package javadeveloper.module4;
+package javadeveloper.module4.storage;
 
 import java.sql.*;
 

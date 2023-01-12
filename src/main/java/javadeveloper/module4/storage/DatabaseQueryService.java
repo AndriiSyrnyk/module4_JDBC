@@ -1,4 +1,6 @@
-package javadeveloper.module4;
+package javadeveloper.module4.storage;
+
+import javadeveloper.module4.queryResultClasses.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,9 +13,8 @@ import java.util.List;
 public class DatabaseQueryService {
     public List<MaxProjectCountClient> findMaxProjectsClient() throws IOException, SQLException {
         List<MaxProjectCountClient> maxProjectCountClientList = new ArrayList<>();
-        String sql = String.join("\n",
-                Files.readAllLines(Path.of("sql/find_max_projects_client.sql")));
-        ResultSet resultSet = Database.getInstance().executeQuery(sql);
+        ResultSet resultSet = Database.getInstance()
+                .executeQuery(readSqlFromFile("sql/find_max_projects_client.sql"));
 
         while (resultSet.next()) {
             maxProjectCountClientList.add(new MaxProjectCountClient(
@@ -27,9 +28,8 @@ public class DatabaseQueryService {
 
     public List<MaxSalaryWorker> findMaxSalaryWorker() throws IOException, SQLException {
         List<MaxSalaryWorker> maxSalaryWorkerList = new ArrayList<>();
-        String sql = String.join("\n",
-                Files.readAllLines(Path.of("sql/ind_max_salary_worker.sql")));
-        ResultSet resultSet = Database.getInstance().executeQuery(sql);
+        ResultSet resultSet = Database.getInstance()
+                .executeQuery(readSqlFromFile("sql/ind_max_salary_worker.sql"));
 
         while (resultSet.next()) {
             maxSalaryWorkerList.add(new MaxSalaryWorker(
@@ -43,9 +43,8 @@ public class DatabaseQueryService {
 
     public List<LongestProject> findLongestProject() throws IOException, SQLException {
         List<LongestProject> longestProjectList = new ArrayList<>();
-        String sql = String.join("\n",
-                Files.readAllLines(Path.of("sql/find_longest_project.sql")));
-        ResultSet resultSet = Database.getInstance().executeQuery(sql);
+        ResultSet resultSet = Database.getInstance()
+                .executeQuery(readSqlFromFile("sql/find_longest_project.sql"));
 
         while (resultSet.next()) {
             longestProjectList.add(new LongestProject(
@@ -57,28 +56,26 @@ public class DatabaseQueryService {
         return longestProjectList;
     }
 
-    public List<YoungestEldestWorkers> findYoungestEldestWorkers() throws IOException, SQLException {
-        List<YoungestEldestWorkers> youngestEldestWorkersList = new ArrayList<>();
-        String sql = String.join("\n",
-                Files.readAllLines(Path.of("sql/find_youngest_eldest_workers.sql")));
-        ResultSet resultSet = Database.getInstance().executeQuery(sql);
+    public List<YoungestEldestWorker> findYoungestEldestWorker() throws IOException, SQLException {
+        List<YoungestEldestWorker> youngestEldestWorkerList = new ArrayList<>();
+        ResultSet resultSet = Database.getInstance()
+                .executeQuery(readSqlFromFile("sql/find_youngest_eldest_workers.sql"));
 
         while (resultSet.next()) {
-            youngestEldestWorkersList.add(new YoungestEldestWorkers(
+            youngestEldestWorkerList.add(new YoungestEldestWorker(
                     resultSet.getString("type"),
                     resultSet.getString("name"),
                     resultSet.getString("birthday")
             ));
         }
 
-        return youngestEldestWorkersList;
+        return youngestEldestWorkerList;
     }
 
     public List<ProjectPrices> printProjectPrices() throws IOException, SQLException {
         List<ProjectPrices> projectPricesList = new ArrayList<>();
-        String sql = String.join("\n",
-                Files.readAllLines(Path.of("sql/print_project_prices.sql")));
-        ResultSet resultSet = Database.getInstance().executeQuery(sql);
+        ResultSet resultSet = Database.getInstance()
+                .executeQuery(readSqlFromFile("sql/print_project_prices.sql"));
 
         while (resultSet.next()) {
             projectPricesList.add(new ProjectPrices(
@@ -88,5 +85,10 @@ public class DatabaseQueryService {
         }
 
         return projectPricesList;
+    }
+
+    private String readSqlFromFile(String path) throws IOException {
+        return String.join("\n",
+                Files.readAllLines(Path.of(path)));
     }
 }
