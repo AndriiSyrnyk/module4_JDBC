@@ -23,8 +23,7 @@ public class Database {
     }
 
     public int executeUpdate(String sql) {
-        try {
-            Statement st = connection.createStatement();
+        try (Statement st = connection.createStatement()){
             return st.executeUpdate(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -32,8 +31,7 @@ public class Database {
     }
 
     public ResultSet executeQuery(String sql) {
-        try {
-            Statement st = connection.createStatement();
+        try (Statement st = connection.createStatement()) {
             return st.executeQuery(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
